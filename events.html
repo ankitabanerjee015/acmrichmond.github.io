@@ -232,7 +232,31 @@
                 margin: 0;
             }
         }
-    </style>
+    
+.nav-right {
+display: flex;
+align-items: center;
+gap: 2rem;
+}
+.theme-toggle-btn {
+background: transparent;
+border: 2px solid var(--cyan-bright);
+color: var(--cyan-bright);
+padding: 0.4rem 0.8rem;
+border-radius: 20px;
+cursor: pointer;
+font-size: 0.85rem;
+font-weight: 600;
+transition: all 0.3s ease;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.theme-toggle-btn:hover {
+background-color: var(--cyan-bright);
+color: #ffffff;
+}
+</style>
 </head>
 <body>
 
@@ -295,5 +319,18 @@
         <p>&copy; 2026 ACM Richmond Professional Chapter. All Rights Reserved.</p>
     </footer>
 
+<script>
+const toggleBtn = document.getElementById('themeToggle');
+toggleBtn.addEventListener('click', () => {
+const currentTheme = document.documentElement.getAttribute('data-theme');
+if (currentTheme === 'light') {
+document.documentElement.removeAttribute('data-theme');
+toggleBtn.innerHTML = '☀️ Light';
+} else {
+document.documentElement.setAttribute('data-theme', 'light');
+toggleBtn.innerHTML = '🌙 Dark';
+}
+});
+</script>
 </body>
 </html>
