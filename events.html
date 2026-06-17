@@ -4,7 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events - ACM Richmond</title>
+    
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark'; // Defaulting to dark mode
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+        }
+    </script>
+
     <style>
+        /* Default Variables (Dark Mode Profile) */
         :root {
             --bg-deep: #0a121c;
             --bg-dark: #111e2e;
@@ -13,6 +24,16 @@
             --cyan-glow: #38bdf8;
             --cyan-bright: #06b6d4;
             --white: #ffffff;
+        }
+
+        /* 💡 2. THE LIGHT MODE OVERRIDES (This is what makes the colors change!) */
+        [data-theme="light"] {
+            --bg-deep: #f8fafc;       /* Light slate grey base background */
+            --bg-dark: #ffffff;       /* Crisp white for cards and header */
+            --text-light: #0f172a;     /* Dark navy slate text */
+            --text-muted: #64748b;     /* Medium gray for text details */
+            --white: #0f172a;          /* Invert headers from white to dark */
+            /* Cyan colors stay vibrant to keep the brand identity consistent */
         }
 
         * {
@@ -26,6 +47,7 @@
             background-color: var(--bg-deep);
             color: var(--text-light);
             line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
         }
 
         header {
@@ -34,6 +56,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: background-color 0.3s ease;
         }
 
         .nav-container {
@@ -127,7 +150,8 @@
             display: grid;
             grid-template-columns: 180px 1fr;
             gap: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
         }
 
         .event-date {
@@ -197,7 +221,7 @@
 
         .btn-small:hover {
             background-color: var(--cyan-bright);
-            color: var(--bg-deep);
+            color: #ffffff;
             box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
         }
 
@@ -209,6 +233,7 @@
             color: var(--text-muted);
             font-size: 0.9rem;
             margin-top: 6rem;
+            transition: background-color 0.3s ease;
         }
 
         @media (max-width: 768px) {
@@ -232,31 +257,33 @@
                 margin: 0;
             }
         }
-    
-.nav-right {
-display: flex;
-align-items: center;
-gap: 2rem;
-}
-.theme-toggle-btn {
-background: transparent;
-border: 2px solid var(--cyan-bright);
-color: var(--cyan-bright);
-padding: 0.4rem 0.8rem;
-border-radius: 20px;
-cursor: pointer;
-font-size: 0.85rem;
-font-weight: 600;
-transition: all 0.3s ease;
-display: flex;
-align-items: center;
-gap: 6px;
-}
-.theme-toggle-btn:hover {
-background-color: var(--cyan-bright);
-color: #ffffff;
-}
-</style>
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .theme-toggle-btn {
+            background: transparent;
+            border: 2px solid var(--cyan-bright);
+            color: var(--cyan-bright);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .theme-toggle-btn:hover {
+            background-color: var(--cyan-bright);
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
 
@@ -320,18 +347,28 @@ color: #ffffff;
         <p>&copy; 2026 ACM Richmond Professional Chapter. All Rights Reserved.</p>
     </footer>
 
-<script>
-const toggleBtn = document.getElementById('themeToggle');
-toggleBtn.addEventListener('click', () => {
-const currentTheme = document.documentElement.getAttribute('data-theme');
-if (currentTheme === 'light') {
-document.documentElement.removeAttribute('data-theme');
-toggleBtn.innerHTML = '☀️ Light';
-} else {
-document.documentElement.setAttribute('data-theme', 'light');
-toggleBtn.innerHTML = '🌙 Dark';
-}
-});
-</script>
+    <script>
+        const toggleBtn = document.getElementById('themeToggle');
+        
+        // Sync button text on initial page load based on current state
+        if (document.documentElement.getAttribute('data-theme') === 'light') {
+            toggleBtn.innerHTML = '🌙 Dark';
+        } else {
+            toggleBtn.innerHTML = '☀️ Light';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+                toggleBtn.innerHTML = '☀️ Light';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                toggleBtn.innerHTML = '🌙 Dark';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
 </body>
 </html>
