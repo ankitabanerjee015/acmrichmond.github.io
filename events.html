@@ -283,6 +283,39 @@
             background-color: var(--cyan-bright);
             color: #ffffff;
         }
+        /* Section Header Utilities */
+.events-section-heading {
+    font-size: 1.6rem;
+    color: var(--cyan-glow);
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+    padding-bottom: 0.5rem;
+}
+
+.past-heading {
+    color: var(--text-muted); /* Past header blends quietly into the background */
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+/* Modifier class for archive cards */
+.event-card.past {
+    opacity: 0.75;
+    border-left-color: var(--text-muted); /* Changes border accent from bright cyan to grey */
+    box-shadow: none; /* Softens past card depth */
+}
+
+/* Clean styling for static 'Concluded' tags */
+.btn-past {
+    display: inline-block;
+    background-color: rgba(148, 163, 184, 0.05);
+    color: var(--text-muted);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: default;
+}
     </style>
 </head>
 <body>
@@ -306,41 +339,109 @@
         </div>
     </header>
 
-    <main class="container">
+ <main class="container">
         <h2 class="page-title">Chapter <span>Events</span></h2>
         <p class="page-subtitle">Join our technical talks, panels, and networking mixers across Richmond.</p>
 
-        <div class="event-list">
-            
-            <div class="event-card">
-                <div class="event-date">
-                    <div class="month">July</div>
-                    <div class="day">16</div>
-                    <div class="time">6:30 PM EST</div>
-                </div>
-                <div class="event-details">
-                    <h3>Inaugural Chapter Meetup & Tech Mixer</h3>
-                    <div class="event-meta">Location: Richmond, VA / Hybrid</div>
-                    <p>Gather with computing professionals and tech leaders to celebrate the official founding launch of our ACM professional chapter. Meet the officer board, network, and help map out our future workshop calendar.</p>
-                    <a href="#" class="btn-small">RSVP Now</a>
-                </div>
-            </div>
+        <!-- =========================================================
+             🚀 UPCOMING EVENTS SECTION
+             (Move cards here when announcing new upcoming activities)
+             ========================================================= -->
+        <div class="section-wrapper">
+            <h3 class="events-section-heading">Upcoming Events</h3>
+            <div class="event-list">
 
-            <div class="event-card">
-                <div class="event-date">
-                    <div class="month">Aug</div>
-                    <div class="day">20</div>
-                    <div class="time">7:00 PM EST</div>
+                <!-- Upcoming Event 1 (Placeholder based on your text) -->
+                <div class="event-card upcoming">
+                    <div class="event-date">
+                        <div class="month">July</div>
+                        <div class="day">16</div>
+                        <div class="time">6:30 PM EST</div>
+                    </div>
+                    <div class="event-details">
+                        <h3>Inaugural Chapter Meetup & Tech Mixer</h3>
+                        <div class="event-meta">Location: Richmond, VA / Hybrid</div>
+                        <p>Gather with computing professionals and tech leaders to celebrate the official founding launch of our ACM professional chapter. Meet the officer board, network, and help map out our future workshop calendar.</p>
+                        <a href="#" class="btn-small">RSVP Now</a>
+                    </div>
                 </div>
-                <div class="event-details">
-                    <h3>Deep Dive: Large Language Model Optimization</h3>
-                    <div class="event-meta">Location: Virtual Session</div>
-                    <p>An engineering-focused discussion tracking modern strategies for local inference, infrastructure scaling bounds, quantization realities, and streamlining resource footprints efficiently.</p>
-                    <a href="#" class="btn-small">Save a Seat</a>
-                </div>
-            </div>
 
+                <!-- Upcoming Event 2 (Placeholder based on your text) -->
+                <div class="event-card upcoming">
+                    <div class="event-date">
+                        <div class="month">Aug</div>
+                        <div class="day">20</div>
+                        <div class="time">7:00 PM EST</div>
+                    </div>
+                    <div class="event-details">
+                        <h3>Deep Dive: Large Language Model Optimization</h3>
+                        <div class="event-meta">Location: Virtual Session</div>
+                        <p>An engineering-focused discussion tracking modern strategies for local inference, infrastructure scaling bounds, quantization realities, and streamlining resource footprints efficiently.</p>
+                        <a href="#" class="btn-small">Save a Seat</a>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
+
+        <!-- =========================================================
+             ⏳ PAST EVENTS ARCHIVE
+             (When an event finishes, drop it down here!)
+             ========================================================= -->
+        <div class="section-wrapper" style="margin-top: 5rem;">
+            <h3 class="events-section-heading past-heading">Past Events</h3>
+            <div class="event-list">
+
+                <!-- Past Event 3: June 06 -->
+                <div class="event-card past">
+                    <div class="event-date">
+                        <div class="month">June</div>
+                        <div class="day">06</div>
+                        <div class="time">10:00 AM EST</div>
+                    </div>
+                    <div class="event-details">
+                        <h3>Technical Dual-Session: Reliable AI Agents & Resilient Real-Time Systems</h3>
+                        <div class="event-meta">Speakers: Vidisha Vijay (Senior Data Scientist, CVS Health) & Ajay Pandey (Director, Tech Development, Tradeweb)</div>
+                        <p><strong>Session 1:</strong> Evaluation frameworks designed for tracking accuracy and robustness across multi-step LLM data pipelines. <br>
+                           <strong>Session 2:</strong> Advanced engineering patterns and operational strategies for scaling infrastructure to handle heavy traffic and real-time event surges.</p>
+                        <span class="btn-past">Event Concluded</span>
+                    </div>
+                </div>
+
+                <!-- Past Event 2: May 16 -->
+                <div class="event-card past">
+                    <div class="event-date">
+                        <div class="month">May</div>
+                        <div class="day">16</div>
+                        <div class="time">10:00 AM EST</div>
+                    </div>
+                    <div class="event-details">
+                        <h3>Why AI Agents Fail in Production – and How to Fix Them</h3>
+                        <div class="event-meta">Featured Speaker: Venkata Phani PatelKhana (Distinguished Engineer at Dell Technology)</div>
+                        <p>An engineering dive mapping out structural patterns for tracking production failures where runtime environments encounter dynamic real-world users. The discussion highlights architectural system boundaries designed to build stable, transparent, and easy-to-debug applications.</p>
+                        <span class="btn-past">Event Concluded</span>
+                    </div>
+                </div>
+
+                <!-- Past Event 1: May 02 -->
+                <div class="event-card past">
+                    <div class="event-date">
+                        <div class="month">May</div>
+                        <div class="day">02</div>
+                        <div class="time">10:00 AM ET</div>
+                    </div>
+                    <div class="event-details">
+                        <h3>ACM Richmond Official Launch Meeting 🎤</h3>
+                        <div class="event-meta">Location: Virtual / Global Session</div>
+                        <p>The formal foundational gathering for ACM Richmond. This initial session introduced the chapter steering committee, laid out our organizational roadmap mission, and provided an exclusive sneak-peek look at our technical presentation lineups.</p>
+                        <span class="btn-past">Event Concluded</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </main>
 
     <footer>
