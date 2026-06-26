@@ -24,18 +24,18 @@ function sanitizeUrl(url) {
 function initTheme() {
   const btn = document.getElementById('themeToggle');
   if (!btn) return;
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  btn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  btn.textContent = isLight ? '🌙 Dark' : '☀️ Light';
   btn.addEventListener('click', () => {
-    const nowDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (nowDark) {
+    const nowLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (nowLight) {
       document.documentElement.removeAttribute('data-theme');
-      btn.textContent = '🌙 Dark';
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
       btn.textContent = '☀️ Light';
       localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      btn.textContent = '🌙 Dark';
+      localStorage.setItem('theme', 'light');
     }
   });
 }
