@@ -215,9 +215,13 @@
   fetch('data/events.json')
     .then(function(r) { return r.json(); })
     .then(function(events) {
-      var upcoming = events.filter(function(e) { return e.type === 'upcoming'; })
-        .sort(function(a, b) { return a.date.localeCompare(b.date); });
-      var next = upcoming[0];
+     var upcoming = events
+        .filter(function(e) {
+          if (e.type !== 'upcoming' || !e.date) return false;
+          var eventDate = new Date(e.date + 'T00:00:00');
+          return !isNaN(eventDate) && eventDate >= now;
+        })
+        .sort(function(a, b) { return a.date.localeCompare(b.date); });  var next = upcoming[0];
       var el = document.getElementById('nextEventSpotlight');
       if (!next) { el.innerHTML = ''; return; }
       el.innerHTML =
