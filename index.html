@@ -104,25 +104,7 @@
     <!-- NEXT EVENT SPOTLIGHT (populated by JS) -->
     <div id="nextEventSpotlight"></div>
 
-    <!-- STAY CONNECTED -->
-    <section class="stay-connected reveal">
-      <h3>Stay Connected</h3>
-      <p class="stay-connected-subtitle">Get notified about upcoming events, speaker announcements, and chapter news. No spam, ever.</p>
-      <!--
-        Email signup: Create a Google Form with one email question, then update EMAIL_FORM_URL
-        in the script below with your form's viewform URL (use pre-fill format for best UX):
-        https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?entry.YOUR_ENTRY_ID=
-      -->
-      <form id="stayConnectedForm" novalidate>
-        <div class="email-form-row">
-          <input type="email" id="emailInput" class="email-input" placeholder="your@email.com" required autocomplete="email">
-          <button type="submit" class="btn-submit">Notify Me</button>
-        </div>
-        <p class="email-note">We respect your privacy. Unsubscribe anytime.</p>
-      </form>
-    </section>
-
-    <!-- CORE PILLARS -->
+     <!-- CORE PILLARS -->
     <section>
       <h2 class="section-title">What We <span>Do</span></h2>
       <div class="pillars-grid reveal-stagger">
@@ -143,6 +125,24 @@
           <p>Connect with Richmond's tech community, find collaborators, mentors, and career opportunities.</p>
         </div>
       </div>
+    </section>
+
+    <!-- STAY CONNECTED -->
+    <section class="stay-connected reveal">
+      <h3>Stay Connected</h3>
+      <p class="stay-connected-subtitle">Get notified about upcoming events, speaker announcements, and chapter news. No spam, ever.</p>
+      <!--
+        Email signup: Create a Google Form with one email question, then update EMAIL_FORM_URL
+        in the script below with your form's viewform URL (use pre-fill format for best UX):
+        https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?entry.YOUR_ENTRY_ID=
+      -->
+      <form id="stayConnectedForm" novalidate>
+        <div class="email-form-row">
+          <input type="email" id="emailInput" class="email-input" placeholder="your@email.com" required autocomplete="email">
+          <button type="submit" class="btn-submit">Notify Me</button>
+        </div>
+        <p class="email-note">We respect your privacy. Unsubscribe anytime.</p>
+      </form>
     </section>
 
     <!-- PHOTO CAROUSEL -->
@@ -272,54 +272,70 @@
   initScrollReveal();
 })
 
-// Dynamic photo carousel from data/photos.json
-var carouselPhotos = [];
-var carouselIndex = 0;
-var carouselImage = document.getElementById('carouselImage');
-var carouselCaption = document.getElementById('carouselCaption');
-var prevPhotoBtn = document.getElementById('prevPhotoBtn');
-var nextPhotoBtn = document.getElementById('nextPhotoBtn');
+<!-- PHOTO CAROUSEL -->
+<section style="margin-top:3.5rem;margin-bottom:4rem">
+  <h3>Chapter Moments</h3>
+  <p class="stay-connected-subtitle">Highlights from ACM Richmond events, talks, and community meetups.</p>
 
-function renderCarousel() {
-  if (!carouselImage || !carouselCaption || !carouselPhotos.length) return;
-  var p = carouselPhotos[carouselIndex];
-  carouselImage.src = p.src;
-  carouselImage.alt = p.alt || ('ACM Richmond photo ' + (carouselIndex + 1));
-  carouselCaption.textContent = (p.caption || 'Photo') + ' (' + (carouselIndex + 1) + '/' + carouselPhotos.length + ')';
-}
+  <div id="photoCarousel" class="next-event-spotlight reveal" style="display:block;padding:0;overflow:hidden">
+    <img id="carouselImage" src="" alt="ACM Richmond event photo" style="width:100%;display:block;max-height:480px;object-fit:cover">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1rem;border-top:1px solid var(--glass-border)">
+      <button id="prevPhotoBtn" class="btn" type="button" aria-label="Previous photo">&larr; Prev</button>
+      <span id="carouselCaption" style="color:var(--text-muted);font-size:0.9rem">Loading photos...</span>
+      <button id="nextPhotoBtn" class="btn" type="button" aria-label="Next photo">Next &rarr;</button>
+    </div>
+  </div>
+</section>
 
-if (prevPhotoBtn && nextPhotoBtn) {
-  prevPhotoBtn.addEventListener('click', function() {
-    if (!carouselPhotos.length) return;
-    carouselIndex = (carouselIndex - 1 + carouselPhotos.length) % carouselPhotos.length;
-    renderCarousel();
-  });
+<script>
+  var carouselPhotos = [];
+  var carouselIndex = 0;
 
-  nextPhotoBtn.addEventListener('click', function() {
-    if (!carouselPhotos.length) return;
-    carouselIndex = (carouselIndex + 1) % carouselPhotos.length;
-    renderCarousel();
-  });
-}
+  var carouselImage = document.getElementById('carouselImage');
+  var carouselCaption = document.getElementById('carouselCaption');
+  var prevPhotoBtn = document.getElementById('prevPhotoBtn');
+  var nextPhotoBtn = document.getElementById('nextPhotoBtn');
 
-fetch('data/photos.json')
-  .then(function(r) { return r.json(); })
-  .then(function(photos) {
-    carouselPhotos = (photos || []).filter(function(p) { return p && p.src; });
+  function renderCarousel() {
+    if (!carouselImage || !carouselCaption || !carouselPhotos.length) return;
+    var p = carouselPhotos[carouselIndex];
+    carouselImage.src = p.src;
+    carouselImage.alt = p.alt || ('ACM Richmond photo ' + (carouselIndex + 1));
+    carouselCaption.textContent = (p.caption || 'Photo') + ' (' + (carouselIndex + 1) + '/' + carouselPhotos.length + ')';
+  }
 
-    if (!carouselPhotos.length) {
+  if (prevPhotoBtn && nextPhotoBtn) {
+    prevPhotoBtn.addEventListener('click', function() {
+      if (!carouselPhotos.length) return;
+      carouselIndex = (carouselIndex - 1 + carouselPhotos.length) % carouselPhotos.length;
+      renderCarousel();
+    });
+
+    nextPhotoBtn.addEventListener('click', function() {
+      if (!carouselPhotos.length) return;
+      carouselIndex = (carouselIndex + 1) % carouselPhotos.length;
+      renderCarousel();
+    });
+  }
+
+  fetch('data/photos.json')
+    .then(function(r) { return r.json(); })
+    .then(function(photoItems) {
+      carouselPhotos = (photoItems || []).filter(function(p) { return p && p.src; });
+
+      if (!carouselPhotos.length) {
+        document.getElementById('photoCarousel').innerHTML =
+          '<div style="padding:1rem;color:var(--text-muted)">No photos available yet.</div>';
+        return;
+      }
+
+      carouselIndex = 0;
+      renderCarousel();
+    })
+    .catch(function() {
       document.getElementById('photoCarousel').innerHTML =
-        '<div style="padding:1rem;color:var(--text-muted)">No photos available yet.</div>';
-      return;
-    }
-
-    carouselIndex = 0;
-    renderCarousel();
-  })
-  .catch(function() {
-    document.getElementById('photoCarousel').innerHTML =
-      '<div style="padding:1rem;color:var(--text-muted)">Unable to load photos.</div>';
-  });
+        '<div style="padding:1rem;color:var(--text-muted)">Unable to load photos.</div>';
+    });
 </script>
 </body>
 </html>
