@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    /* Modern Chapter Moments */
+    /* Poster-focused Chapter Moments */
     .moments-section { margin: 4rem 0; }
     .moments-header { max-width: 760px; margin: 0 auto 1.2rem auto; text-align: center; }
     .moments-kicker {
@@ -32,22 +32,20 @@
     .moments-header p { margin: 0.65rem auto 0; color: var(--text-muted); max-width: 640px; }
 
     .moments-card {
+      max-width: 680px;
+      margin: 0 auto;
       border: 1px solid var(--glass-border);
-      border-radius: 20px;
+      border-radius: 18px;
       overflow: hidden;
-      background: linear-gradient(
-        180deg,
-        color-mix(in srgb, var(--brand-primary) 12%, transparent),
-        color-mix(in srgb, var(--cyan-glow) 6%, transparent)
-      );
-      box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+      background: rgba(0,0,0,0.18);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.30);
     }
 
     .moments-image-wrap {
       position: relative;
-      aspect-ratio: 16 / 9;
       width: 100%;
-      background: rgba(0,0,0,0.18);
+      aspect-ratio: 9 / 16;
+      background: rgba(0,0,0,0.24);
     }
 
     #carouselImage {
@@ -58,7 +56,7 @@
       object-position: center;
       opacity: 1;
       transition: opacity 420ms ease;
-      transform: scale(1.01);
+      transform: none !important;
     }
 
     #carouselImage.is-fading { opacity: 0; }
@@ -66,11 +64,17 @@
     .moments-overlay {
       position: absolute;
       left: 0; right: 0; bottom: 0;
-      padding: 0.85rem 1rem;
+      padding: 0.75rem 1rem;
+      text-align: center;
+      font-size: 0.88rem;
       background: linear-gradient(to top, rgba(5,10,20,0.72), rgba(5,10,20,0.12));
       color: #fff;
-      font-size: 0.93rem;
       backdrop-filter: blur(2px);
+    }
+
+    @media (max-width: 768px) {
+      .moments-card { max-width: 92vw; }
+      .moments-image-wrap { aspect-ratio: 3 / 5; }
     }
   </style>
 
@@ -99,7 +103,6 @@
 </header>
 
 <main>
-  <!-- HERO -->
   <section class="hero-section">
     <div class="hero-content">
       <div class="hero-badge">Richmond, VA &mdash; Est. May 2026</div>
@@ -119,8 +122,6 @@
   </section>
 
   <div class="container">
-
-    <!-- QUICK LINKS -->
     <div class="quick-links reveal-stagger" style="margin-bottom:3.5rem">
       <a href="events.html" class="quick-link-card"><span class="ql-icon">&#128197;</span><span class="ql-label">Events</span></a>
       <a href="media.html" class="quick-link-card"><span class="ql-icon">&#127909;</span><span class="ql-label">Media</span></a>
@@ -129,10 +130,8 @@
       <a href="volunteer.html" class="quick-link-card"><span class="ql-icon">&#128587;</span><span class="ql-label">Volunteer</span></a>
     </div>
 
-    <!-- NEXT EVENT SPOTLIGHT -->
     <div id="nextEventSpotlight"></div>
 
-    <!-- CORE PILLARS -->
     <section style="margin-bottom:3.5rem">
       <h2 class="section-title">What We <span>Do</span></h2>
       <div class="pillars-grid reveal-stagger">
@@ -155,7 +154,6 @@
       </div>
     </section>
 
-    <!-- STAY CONNECTED -->
     <section class="stay-connected reveal" style="margin-bottom:3.5rem">
       <h3>Stay Connected</h3>
       <p class="stay-connected-subtitle">Get notified about upcoming events, speaker announcements, and chapter news. No spam, ever.</p>
@@ -168,7 +166,6 @@
       </form>
     </section>
 
-    <!-- PHOTO CAROUSEL -->
     <section class="moments-section reveal">
       <div class="moments-header">
         <p class="moments-kicker">Gallery</p>
@@ -178,14 +175,13 @@
 
       <div id="photoCarousel" class="moments-card">
         <div class="moments-image-wrap">
-          <img id="carouselImage" src="" alt="ACM Richmond event photo">
+          <img id="carouselImage" src="" alt="ACM Richmond event poster">
           <div class="moments-overlay">
             <span id="carouselCaption">Loading photos...</span>
           </div>
         </div>
       </div>
     </section>
-
   </div>
 </main>
 
@@ -246,9 +242,6 @@
     });
   }
 
-  // =========================
-  // EVENT SPOTLIGHT
-  // =========================
   fetch('data/events.json')
     .then(function(r) {
       if (!r.ok) throw new Error('events.json HTTP ' + r.status);
@@ -264,7 +257,6 @@
         return !isNaN(d);
       });
 
-      // Works even if there is no e.type field
       var upcoming = dated
         .filter(function(e) { return new Date(e.date + 'T00:00:00') >= today; })
         .sort(function(a, b) { return a.date.localeCompare(b.date); });
@@ -314,9 +306,6 @@
       if (el) el.innerHTML = '';
     });
 
-  // =========================
-  // PHOTO CAROUSEL
-  // =========================
   var carouselPhotos = [];
   var carouselIndex = 0;
   var carouselTimer = null;
@@ -324,25 +313,11 @@
   var carouselImage = document.getElementById('carouselImage');
   var carouselCaption = document.getElementById('carouselCaption');
 
- function paintSlide(p) {
-  carouselImage.onload = function () {
-    var iw = carouselImage.naturalWidth || 1;
-    var ih = carouselImage.naturalHeight || 1;
-    var ratio = iw / ih;
-
-    // Landscape/wide => cover, Portrait/tall => contain
-    carouselImage.classList.remove('is-cover', 'is-contain');
-    if (ratio >= 1.15) {
-      carouselImage.classList.add('is-cover');
-    } else {
-      carouselImage.classList.add('is-contain');
-    }
-  };
-
-  carouselImage.src = p.src;
-  carouselImage.alt = p.alt || ('ACM Richmond photo ' + (carouselIndex + 1));
-  carouselCaption.textContent = (p.caption || 'Photo') + ' (' + (carouselIndex + 1) + '/' + carouselPhotos.length + ')';
-}
+  function paintSlide(p) {
+    carouselImage.src = p.src;
+    carouselImage.alt = p.alt || ('ACM Richmond poster ' + (carouselIndex + 1));
+    carouselCaption.textContent = (p.caption || 'Poster') + ' (' + (carouselIndex + 1) + '/' + carouselPhotos.length + ')';
+  }
 
   function renderCarousel(initial) {
     if (!carouselImage || !carouselCaption || !carouselPhotos.length) return;
