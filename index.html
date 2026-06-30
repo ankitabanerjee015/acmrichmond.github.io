@@ -166,22 +166,6 @@
       </form>
     </section>
 
-    <section class="moments-section reveal">
-      <div class="moments-header">
-        <p class="moments-kicker">Gallery</p>
-        <h2>Chapter Moments</h2>
-        <p>Highlights from ACM Richmond events, talks, and community meetups.</p>
-      </div>
-
-      <div id="photoCarousel" class="moments-card">
-        <div class="moments-image-wrap">
-          <img id="carouselImage" src="" alt="ACM Richmond event poster">
-          <div class="moments-overlay">
-            <span id="carouselCaption">Loading photos...</span>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </main>
 
@@ -304,70 +288,6 @@
       console.error('Event spotlight load error:', err);
       var el = document.getElementById('nextEventSpotlight');
       if (el) el.innerHTML = '';
-    });
-
-  var carouselPhotos = [];
-  var carouselIndex = 0;
-  var carouselTimer = null;
-
-  var carouselImage = document.getElementById('carouselImage');
-  var carouselCaption = document.getElementById('carouselCaption');
-
-  function paintSlide(p) {
-    carouselImage.src = p.src;
-    carouselImage.alt = p.alt || ('ACM Richmond poster ' + (carouselIndex + 1));
-    carouselCaption.textContent = (p.caption || 'Poster') + ' (' + (carouselIndex + 1) + '/' + carouselPhotos.length + ')';
-  }
-
-  function renderCarousel(initial) {
-    if (!carouselImage || !carouselCaption || !carouselPhotos.length) return;
-    var p = carouselPhotos[carouselIndex];
-
-    if (initial) {
-      paintSlide(p);
-      return;
-    }
-
-    carouselImage.classList.add('is-fading');
-    setTimeout(function() {
-      paintSlide(p);
-      carouselImage.classList.remove('is-fading');
-    }, 220);
-  }
-
-  function startCarousel() {
-    if (carouselTimer) clearInterval(carouselTimer);
-    carouselTimer = setInterval(function() {
-      if (!carouselPhotos.length) return;
-      carouselIndex = (carouselIndex + 1) % carouselPhotos.length;
-      renderCarousel(false);
-    }, 4200);
-  }
-
-  fetch('data/photos.json')
-    .then(function(r) {
-      if (!r.ok) throw new Error('photos.json HTTP ' + r.status);
-      return r.json();
-    })
-    .then(function(photoItems) {
-      carouselPhotos = (photoItems || []).filter(function(p) { return p && p.src; });
-
-      var shell = document.getElementById('photoCarousel');
-      if (!shell) return;
-
-      if (!carouselPhotos.length) {
-        shell.innerHTML = '<div style="padding:1rem;color:var(--text-muted)">No photos available yet.</div>';
-        return;
-      }
-
-      carouselIndex = 0;
-      renderCarousel(true);
-      startCarousel();
-    })
-    .catch(function(err) {
-      console.error('Carousel load error:', err);
-      var shell = document.getElementById('photoCarousel');
-      if (shell) shell.innerHTML = '<div style="padding:1rem;color:var(--text-muted)">Unable to load photos.</div>';
     });
 </script>
 </body>
