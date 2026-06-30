@@ -90,5 +90,296 @@
         <p>Professional Chapter</p>
       </div>
     </a>
-    <*
-
+    <div class="nav-right" id="navRight">
+      <nav><ul id="navList"></ul></nav>
+      <button class="theme-toggle-btn" id="themeToggle">&#9728;&#65039; Light</button>
+    </div>
+    <button class="hamburger" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-badge">Richmond, VA &mdash; Est. May 2026</div>
+      <h2 class="hero-headline">Where Richmond's <span>Tech Professionals</span><br>Connect, Learn &amp; Lead</h2>
+      <p class="hero-mission">ACM Richmond brings together software engineers, researchers, and innovators for expert talks, hands-on workshops, and real community &mdash; advancing computing as a profession and a science.</p>
+      <div class="hero-actions">
+        <a href="join.html" class="btn-primary-large">Join the Community</a>
+        <a href="events.html" class="btn-outline-large">Explore Events</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">4+</span><span class="stat-label">Events Hosted</span></div>
+        <div class="stat"><span class="stat-num">100+</span><span class="stat-label">Attendees</span></div>
+        <div class="stat"><span class="stat-num">Free</span><span class="stat-label">To Attend</span></div>
+        <div class="stat"><span class="stat-num">6</span><span class="stat-label">Officers</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- QUICK LINKS -->
+    <div class="quick-links reveal-stagger" style="margin-bottom:3.5rem">
+      <a href="events.html" class="quick-link-card"><span class="ql-icon">&#128197;</span><span class="ql-label">Events</span></a>
+      <a href="media.html" class="quick-link-card"><span class="ql-icon">&#127909;</span><span class="ql-label">Media</span></a>
+      <a href="about.html" class="quick-link-card"><span class="ql-icon">&#127963;&#65039;</span><span class="ql-label">About</span></a>
+      <a href="join.html" class="quick-link-card"><span class="ql-icon">&#129309;</span><span class="ql-label">Join Us</span></a>
+      <a href="volunteer.html" class="quick-link-card"><span class="ql-icon">&#128587;</span><span class="ql-label">Volunteer</span></a>
+    </div>
+
+    <!-- NEXT EVENT SPOTLIGHT -->
+    <div id="nextEventSpotlight"></div>
+
+    <!-- CORE PILLARS -->
+    <section style="margin-bottom:3.5rem">
+      <h2 class="section-title">What We <span>Do</span></h2>
+      <div class="pillars-grid reveal-stagger">
+        <div class="pillar-card">
+          <h3>&#9889; Lightning Talks</h3>
+          <p>Short, high-impact presentations from local practitioners on emerging tools, techniques, and lessons learned.</p>
+        </div>
+        <div class="pillar-card">
+          <h3>&#127908; Technical Talks</h3>
+          <p>In-depth sessions from industry experts covering AI, software architecture, cloud infrastructure, and more.</p>
+        </div>
+        <div class="pillar-card">
+          <h3>&#128295; Workshops</h3>
+          <p>Hands-on sessions that build real skills &mdash; from prompt engineering to system design to DevOps practices.</p>
+        </div>
+        <div class="pillar-card">
+          <h3>&#127760; Networking</h3>
+          <p>Connect with Richmond's tech community, find collaborators, mentors, and career opportunities.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAY CONNECTED -->
+    <section class="stay-connected reveal" style="margin-bottom:3.5rem">
+      <h3>Stay Connected</h3>
+      <p class="stay-connected-subtitle">Get notified about upcoming events, speaker announcements, and chapter news. No spam, ever.</p>
+      <form id="stayConnectedForm" novalidate>
+        <div class="email-form-row">
+          <input type="email" id="emailInput" class="email-input" placeholder="your@email.com" required autocomplete="email">
+          <button type="submit" class="btn-submit">Notify Me</button>
+        </div>
+        <p class="email-note">We respect your privacy. Unsubscribe anytime.</p>
+      </form>
+    </section>
+
+    <!-- PHOTO CAROUSEL -->
+    <section class="moments-section reveal">
+      <div class="moments-header">
+        <p class="moments-kicker">Gallery</p>
+        <h2>Chapter Moments</h2>
+        <p>Highlights from ACM Richmond events, talks, and community meetups.</p>
+      </div>
+
+      <div id="photoCarousel" class="moments-card">
+        <div class="moments-image-wrap">
+          <img id="carouselImage" src="" alt="ACM Richmond event photo">
+          <div class="moments-overlay">
+            <span id="carouselCaption">Loading photos...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img src="acm-logo.png" alt="ACM Richmond" width="44" style="border-radius:50%;border:2px solid var(--cyan-glow)">
+      <p class="footer-tagline">ACM Richmond Professional Chapter &mdash; connecting Richmond's tech community through learning, collaboration, and innovation.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="media.html">Media</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="join.html">Join Us</a></li>
+        <li><a href="volunteer.html">Volunteer</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get Involved</h4>
+      <ul>
+        <li><a href="join.html">Apply to Speak</a></li>
+        <li><a href="join.html">Become a Member</a></li>
+        <li><a href="join.html">Officer Roles</a></li>
+        <li><a href="volunteer.html">Volunteer</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/company/richmond-acm-chapter/posts/?feedView=all" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">in</a>
+        <a href="https://www.youtube.com/@ACMChapterRVA" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="YouTube">&#9654;</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 ACM Richmond Professional Chapter</span>
+    <span>A chapter of the <a href="https://www.acm.org" target="_blank" rel="noopener noreferrer">Association for Computing Machinery</a></span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  renderNav('home');
+
+  var EMAIL_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSd-xBwD9xNw3G0Giyvi65U-GrFVs9nfEcXkPI0r7A0BqIA10Q/viewform';
+
+  var stayConnectedForm = document.getElementById('stayConnectedForm');
+  if (stayConnectedForm) {
+    stayConnectedForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('emailInput').value.trim();
+      if (!email) return;
+      window.open(EMAIL_FORM_URL, '_blank');
+      this.innerHTML = '<p style="color:var(--cyan-glow);font-weight:600;font-size:0.95rem;text-align:center">Thanks! Enter your email in the tab that just opened to complete your signup.</p>';
+    });
+  }
+
+  // =========================
+  // EVENT SPOTLIGHT
+  // =========================
+  fetch('data/events.json')
+    .then(function(r) {
+      if (!r.ok) throw new Error('events.json HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(events) {
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      var dated = (events || []).filter(function(e) {
+        if (!e || !e.date) return false;
+        var d = new Date(e.date + 'T00:00:00');
+        return !isNaN(d);
+      });
+
+      // Works even if there is no e.type field
+      var upcoming = dated
+        .filter(function(e) { return new Date(e.date + 'T00:00:00') >= today; })
+        .sort(function(a, b) { return a.date.localeCompare(b.date); });
+
+      var past = dated
+        .filter(function(e) { return new Date(e.date + 'T00:00:00') < today; })
+        .sort(function(a, b) { return b.date.localeCompare(a.date); });
+
+      var selected = upcoming.length ? upcoming[0] : (past.length ? past[0] : null);
+      var isPast = !upcoming.length && !!past.length;
+
+      var el = document.getElementById('nextEventSpotlight');
+      if (!el || !selected) {
+        if (el) el.innerHTML = '';
+        return;
+      }
+
+      el.innerHTML =
+        '<div class="next-event-spotlight reveal" style="margin-bottom:4rem">' +
+          '<div class="date-badge">' +
+            '<div class="month">' + monthAbbr(selected.date) + '</div>' +
+            '<div class="day">' + dayNum(selected.date) + '</div>' +
+            '<div class="year">' + yearNum(selected.date) + '</div>' +
+          '</div>' +
+          '<div>' +
+            '<div style="font-size:0.75rem;color:var(--amber);font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.4rem">' +
+              (isPast ? 'Most Recent Event' : 'Next Event') +
+            '</div>' +
+            '<div class="spotlight-title">' + sanitize(selected.title || '') + '</div>' +
+            '<div class="spotlight-meta">' + sanitize(selected.speaker || '') + (selected.org ? ' &middot; ' + sanitize(selected.org) : '') + '</div>' +
+            '<div class="spotlight-detail">' + sanitize(selected.time || '') + (selected.format ? ' &middot; ' + sanitize(selected.format) : '') + '</div>' +
+          '</div>' +
+          (
+            !isPast
+              ? (selected.link
+                  ? '<a href="' + sanitizeUrl(selected.link) + '" target="_blank" rel="noopener noreferrer" class="btn">Register &rarr;</a>'
+                  : '<span class="btn-muted">Registration Coming Soon</span>')
+              : '<span class="btn-muted">Recording Coming Soon</span>'
+          ) +
+        '</div>';
+
+      initScrollReveal();
+    })
+    .catch(function(err) {
+      console.error('Event spotlight load error:', err);
+      var el = document.getElementById('nextEventSpotlight');
+      if (el) el.innerHTML = '';
+    });
+
+  // =========================
+  // PHOTO CAROUSEL
+  // =========================
+  var carouselPhotos = [];
+  var carouselIndex = 0;
+  var carouselTimer = null;
+
+  var carouselImage = document.getElementById('carouselImage');
+  var carouselCaption = document.getElementById('carouselCaption');
+
+  function paintSlide(p) {
+    carouselImage.src = p.src;
+    carouselImage.alt = p.alt || ('ACM Richmond photo ' + (carouselIndex + 1));
+    carouselCaption.textContent = (p.caption || 'Photo') + ' (' + (carouselIndex + 1) + '/' + carouselPhotos.length + ')';
+  }
+
+  function renderCarousel(initial) {
+    if (!carouselImage || !carouselCaption || !carouselPhotos.length) return;
+    var p = carouselPhotos[carouselIndex];
+
+    if (initial) {
+      paintSlide(p);
+      return;
+    }
+
+    carouselImage.classList.add('is-fading');
+    setTimeout(function() {
+      paintSlide(p);
+      carouselImage.classList.remove('is-fading');
+    }, 220);
+  }
+
+  function startCarousel() {
+    if (carouselTimer) clearInterval(carouselTimer);
+    carouselTimer = setInterval(function() {
+      if (!carouselPhotos.length) return;
+      carouselIndex = (carouselIndex + 1) % carouselPhotos.length;
+      renderCarousel(false);
+    }, 4200);
+  }
+
+  fetch('data/photos.json')
+    .then(function(r) {
+      if (!r.ok) throw new Error('photos.json HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(photoItems) {
+      carouselPhotos = (photoItems || []).filter(function(p) { return p && p.src; });
+
+      var shell = document.getElementById('photoCarousel');
+      if (!shell) return;
+
+      if (!carouselPhotos.length) {
+        shell.innerHTML = '<div style="padding:1rem;color:var(--text-muted)">No photos available yet.</div>';
+        return;
+      }
+
+      carouselIndex = 0;
+      renderCarousel(true);
+      startCarousel();
+    })
+    .catch(function(err) {
+      console.error('Carousel load error:', err);
+      var shell = document.getElementById('photoCarousel');
+      if (shell) shell.innerHTML = '<div style="padding:1rem;color:var(--text-muted)">Unable to load photos.</div>';
+    });
+</script>
+</body>
+</html>
