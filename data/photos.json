@@ -1,5 +1,5 @@
 [
-  { "src": "https://img.youtube.com/vi/OhOUTglBFdM/hqdefault.jpg", "alt": "ACM Richmond event photo 1", "caption": "Technical talk session" },
-  { "src": "https://img.youtube.com/vi/n2zrSuu2ivk/hqdefault.jpg", "alt": "ACM Richmond event", "caption": "Technical talk session" },
-  { "src": "media/acm_and_ieee_collaboration/260614-18-12-38-0244-A7V05636.jpg", "alt": "ACM Richmond event photo 3", "caption": "Networking and discussion" }
+  { "src": "https://img.youtube.com/vi/OhOUTglBFdM/hqdefault.jpg", "alt": "Technical talk thumbnail", "caption": "Technical talk session" },
+  { "src": "https://img.youtube.com/vi/n2zrSuu2ivk/hqdefault.jpg", "alt": "Technical dual session thumbnail", "caption": "Technical dual-session" },
+  { "src": "media/acm_and_ieee_collaboration/260614-18-12-38-0244-A7V05636.jpg", "alt": "ACM × IEEE collaboration", "caption": "Networking and discussion" }
 ]
