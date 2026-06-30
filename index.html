@@ -128,19 +128,23 @@
       </form>
     </section>
 
-    <!-- PHOTO CAROUSEL -->
-    <section class="section-surface section-surface-c" style="margin-top:0;margin-bottom:4rem;padding:1.5rem;border-radius:16px">
-      <h3 style="margin-top:0">Chapter Moments</h3>
-      <p class="stay-connected-subtitle">Highlights from ACM Richmond events, talks, and community meetups.</p>
-      <div id="photoCarousel" class="next-event-spotlight reveal" style="display:block;padding:0;overflow:hidden;margin-bottom:0">
-        <img id="carouselImage" src="" alt="ACM Richmond event photo" style="width:100%;display:block;max-height:480px;object-fit:cover">
-        <div style="padding:0.9rem 1rem;border-top:1px solid var(--glass-border);text-align:center">
-          <span id="carouselCaption" style="color:var(--text-muted);font-size:0.9rem">Loading photos...</span>
-        </div>
-      </div>
-    </section>
+   <!-- PHOTO CAROUSEL -->
+<section class="moments-section reveal">
+  <div class="moments-header">
+    <p class="moments-kicker">Gallery</p>
+    <h2>Chapter Moments</h2>
+    <p>Highlights from ACM Richmond events, talks, and community meetups.</p>
   </div>
-</main>
+
+  <div id="photoCarousel" class="moments-card">
+    <div class="moments-image-wrap">
+      <img id="carouselImage" src="" alt="ACM Richmond event photo">
+      <div class="moments-overlay">
+        <span id="carouselCaption">Loading photos...</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer>
   <div class="footer-grid">
@@ -257,7 +261,8 @@
       if (el) el.innerHTML = '';
     });
 
-  // Auto carousel
+  <script>
+  // Auto carousel with fade transition
   var carouselPhotos = [];
   var carouselIndex = 0;
   var carouselTimer = null;
@@ -265,12 +270,26 @@
   var carouselImage = document.getElementById('carouselImage');
   var carouselCaption = document.getElementById('carouselCaption');
 
-  function renderCarousel() {
-    if (!carouselImage || !carouselCaption || !carouselPhotos.length) return;
-    var p = carouselPhotos[carouselIndex];
+  function paintSlide(p) {
     carouselImage.src = p.src;
     carouselImage.alt = p.alt || ('ACM Richmond photo ' + (carouselIndex + 1));
     carouselCaption.textContent = (p.caption || 'Photo') + ' (' + (carouselIndex + 1) + '/' + carouselPhotos.length + ')';
+  }
+
+  function renderCarousel(initial) {
+    if (!carouselImage || !carouselCaption || !carouselPhotos.length) return;
+    var p = carouselPhotos[carouselIndex];
+
+    if (initial) {
+      paintSlide(p);
+      return;
+    }
+
+    carouselImage.classList.add('is-fading');
+    setTimeout(function() {
+      paintSlide(p);
+      carouselImage.classList.remove('is-fading');
+    }, 220);
   }
 
   function startCarousel() {
@@ -278,8 +297,8 @@
     carouselTimer = setInterval(function() {
       if (!carouselPhotos.length) return;
       carouselIndex = (carouselIndex + 1) % carouselPhotos.length;
-      renderCarousel();
-    }, 3200);
+      renderCarousel(false);
+    }, 4200);
   }
 
   fetch('data/photos.json')
@@ -296,7 +315,7 @@
       }
 
       carouselIndex = 0;
-      renderCarousel();
+      renderCarousel(true);
       startCarousel();
     })
     .catch(function() {
