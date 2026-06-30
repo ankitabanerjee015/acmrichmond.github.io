@@ -19,6 +19,22 @@
   <link rel="icon" type="image/png" href="acm-logo.png">
   <link rel="apple-touch-icon" href="acm-logo.png">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Subtle section differentiation (keeps existing theme colors) */
+    .section-surface {
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(4px);
+    }
+    .section-surface-a {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--cyan-glow) 10%, transparent), transparent 70%);
+    }
+    .section-surface-b {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--amber) 10%, transparent), transparent 70%);
+    }
+    .section-surface-c {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--brand-primary) 10%, transparent), transparent 70%);
+    }
+  </style>
   <script>
     const _t = localStorage.getItem('theme');
     if (_t === 'light') document.documentElement.setAttribute('data-theme', 'light');
@@ -55,57 +71,29 @@
         <a href="events.html" class="btn-outline-large">Explore Events</a>
       </div>
       <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num">4+</span>
-          <span class="stat-label">Events Hosted</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">100+</span>
-          <span class="stat-label">Attendees</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">Free</span>
-          <span class="stat-label">To Attend</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">6</span>
-          <span class="stat-label">Officers</span>
-        </div>
+        <div class="stat"><span class="stat-num">4+</span><span class="stat-label">Events Hosted</span></div>
+        <div class="stat"><span class="stat-num">100+</span><span class="stat-label">Attendees</span></div>
+        <div class="stat"><span class="stat-num">Free</span><span class="stat-label">To Attend</span></div>
+        <div class="stat"><span class="stat-num">6</span><span class="stat-label">Officers</span></div>
       </div>
     </div>
   </section>
 
   <div class="container">
-
     <!-- QUICK LINKS -->
     <div class="quick-links reveal-stagger" style="margin-bottom:3.5rem">
-      <a href="events.html" class="quick-link-card">
-        <span class="ql-icon">&#128197;</span>
-        <span class="ql-label">Events</span>
-      </a>
-      <a href="media.html" class="quick-link-card">
-        <span class="ql-icon">&#127909;</span>
-        <span class="ql-label">Media</span>
-      </a>
-      <a href="about.html" class="quick-link-card">
-        <span class="ql-icon">&#127963;&#65039;</span>
-        <span class="ql-label">About</span>
-      </a>
-      <a href="join.html" class="quick-link-card">
-        <span class="ql-icon">&#129309;</span>
-        <span class="ql-label">Join Us</span>
-      </a>
-      <a href="volunteer.html" class="quick-link-card">
-        <span class="ql-icon">&#128587;</span>
-        <span class="ql-label">Volunteer</span>
-      </a>
+      <a href="events.html" class="quick-link-card"><span class="ql-icon">&#128197;</span><span class="ql-label">Events</span></a>
+      <a href="media.html" class="quick-link-card"><span class="ql-icon">&#127909;</span><span class="ql-label">Media</span></a>
+      <a href="about.html" class="quick-link-card"><span class="ql-icon">&#127963;&#65039;</span><span class="ql-label">About</span></a>
+      <a href="join.html" class="quick-link-card"><span class="ql-icon">&#129309;</span><span class="ql-label">Join Us</span></a>
+      <a href="volunteer.html" class="quick-link-card"><span class="ql-icon">&#128587;</span><span class="ql-label">Volunteer</span></a>
     </div>
 
-    <!-- NEXT EVENT SPOTLIGHT (populated by JS) -->
+    <!-- NEXT EVENT SPOTLIGHT -->
     <div id="nextEventSpotlight"></div>
 
-     <!-- CORE PILLARS -->
-    <section>
+    <!-- CORE PILLARS -->
+    <section class="section-surface section-surface-a" style="padding:1.5rem;border-radius:16px;margin-bottom:3.5rem">
       <h2 class="section-title">What We <span>Do</span></h2>
       <div class="pillars-grid reveal-stagger">
         <div class="pillar-card">
@@ -128,14 +116,9 @@
     </section>
 
     <!-- STAY CONNECTED -->
-    <section class="stay-connected reveal">
+    <section class="stay-connected reveal section-surface section-surface-b" style="margin-bottom:3.5rem">
       <h3>Stay Connected</h3>
       <p class="stay-connected-subtitle">Get notified about upcoming events, speaker announcements, and chapter news. No spam, ever.</p>
-      <!--
-        Email signup: Create a Google Form with one email question, then update EMAIL_FORM_URL
-        in the script below with your form's viewform URL (use pre-fill format for best UX):
-        https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?entry.YOUR_ENTRY_ID=
-      -->
       <form id="stayConnectedForm" novalidate>
         <div class="email-form-row">
           <input type="email" id="emailInput" class="email-input" placeholder="your@email.com" required autocomplete="email">
@@ -146,18 +129,16 @@
     </section>
 
     <!-- PHOTO CAROUSEL -->
-<section style="margin-top:3.5rem;margin-bottom:4rem">
- <h3>Chapter Moments</h3>
-<p class="stay-connected-subtitle">Highlights from ACM Richmond events, talks, and community meetups.</p>
-  <div id="photoCarousel" class="next-event-spotlight reveal" style="display:block;padding:0;overflow:hidden">
-    <img id="carouselImage" src="" alt="ACM Richmond event photo" style="width:100%;display:block;max-height:480px;object-fit:cover">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1rem;border-top:1px solid var(--glass-border)">
-      <button id="prevPhotoBtn" class="btn" type="button" aria-label="Previous photo">&larr; Prev</button>
-      <span id="carouselCaption" style="color:var(--text-muted);font-size:0.9rem">Loading photos...</span>
-      <button id="nextPhotoBtn" class="btn" type="button" aria-label="Next photo">Next &rarr;</button>
-    </div>
-  </div>
-</section>
+    <section class="section-surface section-surface-c" style="margin-top:0;margin-bottom:4rem;padding:1.5rem;border-radius:16px">
+      <h3 style="margin-top:0">Chapter Moments</h3>
+      <p class="stay-connected-subtitle">Highlights from ACM Richmond events, talks, and community meetups.</p>
+      <div id="photoCarousel" class="next-event-spotlight reveal" style="display:block;padding:0;overflow:hidden;margin-bottom:0">
+        <img id="carouselImage" src="" alt="ACM Richmond event photo" style="width:100%;display:block;max-height:480px;object-fit:cover">
+        <div style="padding:0.9rem 1rem;border-top:1px solid var(--glass-border);text-align:center">
+          <span id="carouselCaption" style="color:var(--text-muted);font-size:0.9rem">Loading photos...</span>
+        </div>
+      </div>
+    </section>
   </div>
 </main>
 
@@ -190,10 +171,8 @@
     <div class="footer-col">
       <h4>Connect</h4>
       <div class="footer-social">
-        <a href="https://www.linkedin.com/company/richmond-acm-chapter/posts/?feedView=all"
-           target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">in</a>
-        <a href="https://www.youtube.com/@ACMChapterRVA"
-           target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="YouTube">&#9654;</a>
+        <a href="https://www.linkedin.com/company/richmond-acm-chapter/posts/?feedView=all" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">in</a>
+        <a href="https://www.youtube.com/@ACMChapterRVA" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="YouTube">&#9654;</a>
       </div>
     </div>
   </div>
@@ -209,92 +188,82 @@
 
   var EMAIL_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSd-xBwD9xNw3G0Giyvi65U-GrFVs9nfEcXkPI0r7A0BqIA10Q/viewform';
 
-  document.getElementById('stayConnectedForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var email = document.getElementById('emailInput').value.trim();
-    if (!email) return;
-    window.open(EMAIL_FORM_URL, '_blank');
-    this.innerHTML = '<p style="color:var(--cyan-glow);font-weight:600;font-size:0.95rem;text-align:center">Thanks! Enter your email in the tab that just opened to complete your signup.</p>';
-  });
+  var stayConnectedForm = document.getElementById('stayConnectedForm');
+  if (stayConnectedForm) {
+    stayConnectedForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('emailInput').value.trim();
+      if (!email) return;
+      window.open(EMAIL_FORM_URL, '_blank');
+      this.innerHTML = '<p style="color:var(--cyan-glow);font-weight:600;font-size:0.95rem;text-align:center">Thanks! Enter your email in the tab that just opened to complete your signup.</p>';
+    });
+  }
 
+  // Next/Past event spotlight
   fetch('data/events.json')
     .then(function(r) { return r.json(); })
     .then(function(events) {
-  var today = new Date();
-  today.setHours(0, 0, 0, 0);
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
 
-  // Keep only valid dated events
-  var dated = events.filter(function(e) {
-    if (!e.date) return false;
-    var d = new Date(e.date + 'T00:00:00');
-    return !isNaN(d);
-  });
+      var dated = events.filter(function(e) {
+        if (!e.date) return false;
+        var d = new Date(e.date + 'T00:00:00');
+        return !isNaN(d);
+      });
 
-  // Pick next upcoming event; if none, pick most recent past
-  var upcoming = dated
-    .filter(function(e) { return new Date(e.date + 'T00:00:00') >= today; })
-    .sort(function(a, b) { return a.date.localeCompare(b.date); });
+      var upcoming = dated
+        .filter(function(e) { return new Date(e.date + 'T00:00:00') >= today; })
+        .sort(function(a, b) { return a.date.localeCompare(b.date); });
 
-  var past = dated
-    .filter(function(e) { return new Date(e.date + 'T00:00:00') < today; })
-    .sort(function(a, b) { return b.date.localeCompare(a.date); });
+      var past = dated
+        .filter(function(e) { return new Date(e.date + 'T00:00:00') < today; })
+        .sort(function(a, b) { return b.date.localeCompare(a.date); });
 
-  var selected = upcoming.length ? upcoming[0] : past[0];
-  var isPast = !upcoming.length && !!past.length;
+      var selected = upcoming.length ? upcoming[0] : past[0];
+      var isPast = !upcoming.length && !!past.length;
 
-  var el = document.getElementById('nextEventSpotlight');
-  if (!selected) { el.innerHTML = ''; return; }
+      var el = document.getElementById('nextEventSpotlight');
+      if (!el || !selected) { if (el) el.innerHTML = ''; return; }
 
-  el.innerHTML =
-    '<div class="next-event-spotlight reveal" style="margin-bottom:4rem">' +
-      '<div class="date-badge">' +
-        '<div class="month">' + monthAbbr(selected.date) + '</div>' +
-        '<div class="day">'   + dayNum(selected.date)   + '</div>' +
-        '<div class="year">'  + yearNum(selected.date)  + '</div>' +
-      '</div>' +
-      '<div>' +
-        '<div style="font-size:0.75rem;color:var(--amber);font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.4rem">' +
-          (isPast ? 'Most Recent Event' : 'Next Event') +
-        '</div>' +
-        '<div class="spotlight-title">'  + sanitize(selected.title)   + '</div>' +
-        '<div class="spotlight-meta">'   + sanitize(selected.speaker || '') + (selected.org ? ' &middot; ' + sanitize(selected.org) : '') + '</div>' +
-        '<div class="spotlight-detail">' + sanitize(selected.time || '') + (selected.format ? ' &middot; ' + sanitize(selected.format) : '') + '</div>' +
-      '</div>' +
-      (
-        !isPast
-          ? (selected.link
-              ? '<a href="' + sanitizeUrl(selected.link) + '" target="_blank" rel="noopener noreferrer" class="btn">Register &rarr;</a>'
-              : '<span class="btn-muted">Registration Coming Soon</span>')
-          : '<span class="btn-muted">Recording Coming Soon</span>'
-      ) +
-    '</div>';
+      el.innerHTML =
+        '<div class="next-event-spotlight reveal" style="margin-bottom:4rem">' +
+          '<div class="date-badge">' +
+            '<div class="month">' + monthAbbr(selected.date) + '</div>' +
+            '<div class="day">' + dayNum(selected.date) + '</div>' +
+            '<div class="year">' + yearNum(selected.date) + '</div>' +
+          '</div>' +
+          '<div>' +
+            '<div style="font-size:0.75rem;color:var(--amber);font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.4rem">' +
+              (isPast ? 'Most Recent Event' : 'Next Event') +
+            '</div>' +
+            '<div class="spotlight-title">' + sanitize(selected.title) + '</div>' +
+            '<div class="spotlight-meta">' + sanitize(selected.speaker || '') + (selected.org ? ' &middot; ' + sanitize(selected.org) : '') + '</div>' +
+            '<div class="spotlight-detail">' + sanitize(selected.time || '') + (selected.format ? ' &middot; ' + sanitize(selected.format) : '') + '</div>' +
+          '</div>' +
+          (
+            !isPast
+              ? (selected.link
+                  ? '<a href="' + sanitizeUrl(selected.link) + '" target="_blank" rel="noopener noreferrer" class="btn">Register &rarr;</a>'
+                  : '<span class="btn-muted">Registration Coming Soon</span>')
+              : '<span class="btn-muted">Recording Coming Soon</span>'
+          ) +
+        '</div>';
 
-  initScrollReveal();
-})
+      initScrollReveal();
+    })
+    .catch(function() {
+      var el = document.getElementById('nextEventSpotlight');
+      if (el) el.innerHTML = '';
+    });
 
-<!-- PHOTO CAROUSEL -->
-<section style="margin-top:3.5rem;margin-bottom:4rem">
-  <h3>Chapter Moments</h3>
-  <p class="stay-connected-subtitle">Highlights from ACM Richmond events, talks, and community meetups.</p>
-
-  <div id="photoCarousel" class="next-event-spotlight reveal" style="display:block;padding:0;overflow:hidden">
-    <img id="carouselImage" src="" alt="ACM Richmond event photo" style="width:100%;display:block;max-height:480px;object-fit:cover">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1rem;border-top:1px solid var(--glass-border)">
-      <button id="prevPhotoBtn" class="btn" type="button" aria-label="Previous photo">&larr; Prev</button>
-      <span id="carouselCaption" style="color:var(--text-muted);font-size:0.9rem">Loading photos...</span>
-      <button id="nextPhotoBtn" class="btn" type="button" aria-label="Next photo">Next &rarr;</button>
-    </div>
-  </div>
-</section>
-
-<script>
+  // Auto carousel
   var carouselPhotos = [];
   var carouselIndex = 0;
+  var carouselTimer = null;
 
   var carouselImage = document.getElementById('carouselImage');
   var carouselCaption = document.getElementById('carouselCaption');
-  var prevPhotoBtn = document.getElementById('prevPhotoBtn');
-  var nextPhotoBtn = document.getElementById('nextPhotoBtn');
 
   function renderCarousel() {
     if (!carouselImage || !carouselCaption || !carouselPhotos.length) return;
@@ -304,18 +273,13 @@
     carouselCaption.textContent = (p.caption || 'Photo') + ' (' + (carouselIndex + 1) + '/' + carouselPhotos.length + ')';
   }
 
-  if (prevPhotoBtn && nextPhotoBtn) {
-    prevPhotoBtn.addEventListener('click', function() {
-      if (!carouselPhotos.length) return;
-      carouselIndex = (carouselIndex - 1 + carouselPhotos.length) % carouselPhotos.length;
-      renderCarousel();
-    });
-
-    nextPhotoBtn.addEventListener('click', function() {
+  function startCarousel() {
+    if (carouselTimer) clearInterval(carouselTimer);
+    carouselTimer = setInterval(function() {
       if (!carouselPhotos.length) return;
       carouselIndex = (carouselIndex + 1) % carouselPhotos.length;
       renderCarousel();
-    });
+    }, 3200);
   }
 
   fetch('data/photos.json')
@@ -323,18 +287,23 @@
     .then(function(photoItems) {
       carouselPhotos = (photoItems || []).filter(function(p) { return p && p.src; });
 
+      var shell = document.getElementById('photoCarousel');
+      if (!shell) return;
+
       if (!carouselPhotos.length) {
-        document.getElementById('photoCarousel').innerHTML =
-          '<div style="padding:1rem;color:var(--text-muted)">No photos available yet.</div>';
+        shell.innerHTML = '<div style="padding:1rem;color:var(--text-muted)">No photos available yet.</div>';
         return;
       }
 
       carouselIndex = 0;
       renderCarousel();
+      startCarousel();
     })
     .catch(function() {
-      document.getElementById('photoCarousel').innerHTML =
-        '<div style="padding:1rem;color:var(--text-muted)">Unable to load photos.</div>';
+      var shell = document.getElementById('photoCarousel');
+      if (shell) {
+        shell.innerHTML = '<div style="padding:1rem;color:var(--text-muted)">Unable to load photos.</div>';
+      }
     });
 </script>
 </body>
