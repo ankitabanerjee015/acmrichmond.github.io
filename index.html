@@ -324,11 +324,25 @@
   var carouselImage = document.getElementById('carouselImage');
   var carouselCaption = document.getElementById('carouselCaption');
 
-  function paintSlide(p) {
-    carouselImage.src = p.src;
-    carouselImage.alt = p.alt || ('ACM Richmond photo ' + (carouselIndex + 1));
-    carouselCaption.textContent = (p.caption || 'Photo') + ' (' + (carouselIndex + 1) + '/' + carouselPhotos.length + ')';
-  }
+ function paintSlide(p) {
+  carouselImage.onload = function () {
+    var iw = carouselImage.naturalWidth || 1;
+    var ih = carouselImage.naturalHeight || 1;
+    var ratio = iw / ih;
+
+    // Landscape/wide => cover, Portrait/tall => contain
+    carouselImage.classList.remove('is-cover', 'is-contain');
+    if (ratio >= 1.15) {
+      carouselImage.classList.add('is-cover');
+    } else {
+      carouselImage.classList.add('is-contain');
+    }
+  };
+
+  carouselImage.src = p.src;
+  carouselImage.alt = p.alt || ('ACM Richmond photo ' + (carouselIndex + 1));
+  carouselCaption.textContent = (p.caption || 'Photo') + ' (' + (carouselIndex + 1) + '/' + carouselPhotos.length + ')';
+}
 
   function renderCarousel(initial) {
     if (!carouselImage || !carouselCaption || !carouselPhotos.length) return;
