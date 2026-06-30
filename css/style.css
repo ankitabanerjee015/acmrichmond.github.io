@@ -1255,3 +1255,81 @@ footer {
 @media (max-width: 360px) {
   .photo-grid { grid-template-columns: 1fr; }
 }
+/* Modern Chapter Moments */
+.moments-section {
+  margin: 4rem 0;
+}
+
+.moments-header {
+  max-width: 760px;
+  margin: 0 auto 1.2rem auto;
+  text-align: center;
+}
+
+.moments-kicker {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 700;
+}
+
+.moments-header h2 {
+  margin: 0;
+  font-size: clamp(1.55rem, 2.8vw, 2.2rem);
+  line-height: 1.2;
+}
+
+.moments-header p {
+  margin: 0.65rem auto 0;
+  color: var(--text-muted);
+  max-width: 640px;
+}
+
+.moments-card {
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--brand-primary) 12%, transparent),
+    color-mix(in srgb, var(--cyan-glow) 6%, transparent)
+  );
+  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+}
+
+.moments-image-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background: rgba(0,0,0,0.18);
+}
+
+#carouselImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  opacity: 1;
+  transition: opacity 420ms ease;
+  transform: scale(1.01);
+}
+
+#carouselImage.is-fading {
+  opacity: 0;
+}
+
+.moments-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(to top, rgba(5,10,20,0.72), rgba(5,10,20,0.12));
+  color: #fff;
+  font-size: 0.93rem;
+  backdrop-filter: blur(2px);
+}
