@@ -1,0 +1,5 @@
+[
+  { "src": "images/event1.jpg", "alt": "ACM Richmond event photo 1", "caption": "Community meetup" },
+  { "src": "images/event2.jpg", "alt": "ACM Richmond event photo 2", "caption": "Technical talk session" },
+  { "src": "images/event3.jpg", "alt": "ACM Richmond event photo 3", "caption": "Networking and discussion" }
+]
