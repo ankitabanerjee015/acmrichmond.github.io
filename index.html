@@ -215,13 +215,9 @@
   fetch('data/events.json')
     .then(function(r) { return r.json(); })
     .then(function(events) {
-     var upcoming = events
-        .filter(function(e) {
-          if (e.type !== 'upcoming' || !e.date) return false;
-          var eventDate = new Date(e.date + 'T00:00:00');
-          return !isNaN(eventDate) && eventDate >= now;
-        })
-        .sort(function(a, b) { return a.date.localeCompare(b.date); });  var next = upcoming[0];
+      var upcoming = events.filter(function(e) { return e.type === 'upcoming'; })
+        .sort(function(a, b) { return a.date.localeCompare(b.date); });
+      var next = upcoming[0];
       var el = document.getElementById('nextEventSpotlight');
       if (!next) { el.innerHTML = ''; return; }
       el.innerHTML =
@@ -245,27 +241,16 @@
       document.getElementById('nextEventSpotlight').innerHTML = '';
     });
 
- fetch('data/events.json')
+  fetch('data/team.json')
     .then(function(r) { return r.json(); })
-    .then(function(events) {
-      var now = new Date();
-      now.setHours(0, 0, 0, 0);
-
-      var upcoming = events
-        .filter(function(e) {
-          if (e.type !== 'upcoming' || !e.date) return false;
-          var eventDate = new Date(e.date + 'T00:00:00');
-          return !isNaN(eventDate) && eventDate >= now;
-        })
-        .sort(function(a, b) { return a.date.localeCompare(b.date); });
-
-      var next = upcoming[0];
-      var el = document.getElementById('nextEventSpotlight');
-      if (!next) { el.innerHTML = ''; return; }
-      ...
+    .then(function(team) {
+      var grid = document.getElementById('officerGrid');
+      grid.innerHTML = team.map(officerCardHTML).join('');
+      animateIn(grid);
     })
     .catch(function() {
-      document.getElementById('nextEventSpotlight').innerHTML = '';
+      document.getElementById('officerGrid').innerHTML =
+        '<p style="text-align:center;color:var(--text-muted)">Unable to load team data.</p>';
     });
 </script>
 </body>
