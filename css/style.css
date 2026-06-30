@@ -1333,3 +1333,9 @@ footer {
   font-size: 0.93rem;
   backdrop-filter: blur(2px);
 }
+#carouselImage.is-cover {
+  object-fit: cover;
+}
+#carouselImage.is-contain {
+  object-fit: contain;
+}
