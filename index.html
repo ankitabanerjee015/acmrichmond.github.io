@@ -215,58 +215,57 @@
   fetch('data/events.json')
     .then(function(r) { return r.json(); })
     .then(function(events) {
-      var today = new Date();
-today.setHours(0, 0, 0, 0);
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-var dated = events.filter(function(e) {
-  if (!e.date) return false;
-  var d = new Date(e.date + 'T00:00:00');
-  return !isNaN(d);
-});
+  // Keep only valid dated events
+  var dated = events.filter(function(e) {
+    if (!e.date) return false;
+    var d = new Date(e.date + 'T00:00:00');
+    return !isNaN(d);
+  });
 
-var upcoming = dated
-  .filter(function(e) { return new Date(e.date + 'T00:00:00') >= today; })
-  .sort(function(a, b) { return a.date.localeCompare(b.date); });
+  // Pick next upcoming event; if none, pick most recent past
+  var upcoming = dated
+    .filter(function(e) { return new Date(e.date + 'T00:00:00') >= today; })
+    .sort(function(a, b) { return a.date.localeCompare(b.date); });
 
-var past = dated
-  .filter(function(e) { return new Date(e.date + 'T00:00:00') < today; })
-  .sort(function(a, b) { return b.date.localeCompare(a.date); });
+  var past = dated
+    .filter(function(e) { return new Date(e.date + 'T00:00:00') < today; })
+    .sort(function(a, b) { return b.date.localeCompare(a.date); });
 
-var selected = upcoming.length ? upcoming[0] : past[0];
-var isPast = !upcoming.length && !!past.length;
+  var selected = upcoming.length ? upcoming[0] : past[0];
+  var isPast = !upcoming.length && !!past.length;
 
-var el = document.getElementById('nextEventSpotlight');
-if (!selected) { el.innerHTML = ''; return; }
+  var el = document.getElementById('nextEventSpotlight');
+  if (!selected) { el.innerHTML = ''; return; }
 
-el.innerHTML =
-  '<div class="next-event-spotlight reveal" style="margin-bottom:4rem">' +
-    '<div class="date-badge">' +
-      '<div class="month">' + monthAbbr(selected.date) + '</div>' +
-      '<div class="day">'   + dayNum(selected.date)   + '</div>' +
-      '<div class="year">'  + yearNum(selected.date)  + '</div>' +
-    '</div>' +
-    '<div>' +
-      '<div style="font-size:0.75rem;color:var(--amber);font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.4rem">' +
-        (isPast ? 'Most Recent Event' : 'Next Event') +
+  el.innerHTML =
+    '<div class="next-event-spotlight reveal" style="margin-bottom:4rem">' +
+      '<div class="date-badge">' +
+        '<div class="month">' + monthAbbr(selected.date) + '</div>' +
+        '<div class="day">'   + dayNum(selected.date)   + '</div>' +
+        '<div class="year">'  + yearNum(selected.date)  + '</div>' +
       '</div>' +
-      '<div class="spotlight-title">'  + sanitize(selected.title)   + '</div>' +
-      '<div class="spotlight-meta">'   + sanitize(selected.speaker || '') + (selected.org ? ' &middot; ' + sanitize(selected.org) : '') + '</div>' +
-      '<div class="spotlight-detail">' + sanitize(selected.time || '') + (selected.format ? ' &middot; ' + sanitize(selected.format) : '') + '</div>' +
-    '</div>' +
-    (
-      !isPast && selected.link
-        ? '<a href="' + sanitizeUrl(selected.link) + '" target="_blank" rel="noopener noreferrer" class="btn">Register &rarr;</a>'
-        : (selected.video_url
-            ? '<a href="' + sanitizeUrl(selected.video_url) + '" target="_blank" rel="noopener noreferrer" class="btn">Watch Recording &rarr;</a>'
-            : '<span></span>')
-    ) +
-  '</div>';
-        '</div>';
-      initScrollReveal();
-    })
-    .catch(function() {
-      document.getElementById('nextEventSpotlight').innerHTML = '';
-    });
+      '<div>' +
+        '<div style="font-size:0.75rem;color:var(--amber);font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.4rem">' +
+          (isPast ? 'Most Recent Event' : 'Next Event') +
+        '</div>' +
+        '<div class="spotlight-title">'  + sanitize(selected.title)   + '</div>' +
+        '<div class="spotlight-meta">'   + sanitize(selected.speaker || '') + (selected.org ? ' &middot; ' + sanitize(selected.org) : '') + '</div>' +
+        '<div class="spotlight-detail">' + sanitize(selected.time || '') + (selected.format ? ' &middot; ' + sanitize(selected.format) : '') + '</div>' +
+      '</div>' +
+      (
+        !isPast
+          ? (selected.link
+              ? '<a href="' + sanitizeUrl(selected.link) + '" target="_blank" rel="noopener noreferrer" class="btn">Register &rarr;</a>'
+              : '<span class="btn-muted">Registration Coming Soon</span>')
+          : '<span class="btn-muted">Recording Coming Soon</span>'
+      ) +
+    '</div>';
+
+  initScrollReveal();
+})
 
   fetch('data/team.json')
     .then(function(r) { return r.json(); })
