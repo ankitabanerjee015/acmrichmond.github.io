@@ -157,24 +157,10 @@
   fetch('data/events.json')
     .then(function(r) { return r.json(); })
     .then(function(events) {
-  var today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  var upcoming = events
-    .filter(function(e) {
-      if (!e.date) return false;
-      var d = new Date(e.date + 'T00:00:00');
-      return !isNaN(d) && d >= today;
-    })
-    .sort(function(a, b) { return a.date.localeCompare(b.date); });
-
-  var past = events
-    .filter(function(e) {
-      if (!e.date) return false;
-      var d = new Date(e.date + 'T00:00:00');
-      return !isNaN(d) && d < today;
-    })
-    .sort(function(a, b) { return b.date.localeCompare(a.date); });
+      var upcoming = events.filter(function(e) { return e.type === 'upcoming'; })
+        .sort(function(a, b) { return a.date.localeCompare(b.date); });
+      var past = events.filter(function(e) { return e.type === 'past'; })
+        .sort(function(a, b) { return b.date.localeCompare(a.date); });
 
       var upEl = document.getElementById('upcomingList');
       var paEl = document.getElementById('pastList');
